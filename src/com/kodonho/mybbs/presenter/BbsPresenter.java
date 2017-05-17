@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.kodonho.mybbs.model.Bbs;
+import com.kodonho.mybbs.view.BbsDetail;
 import com.kodonho.mybbs.view.BbsInput;
 import com.kodonho.mybbs.view.BbsList;
 
@@ -12,12 +13,15 @@ public class BbsPresenter {
 	final boolean FINISH = false;
 	boolean runFlag = START;
 	
-	// 데이터 임시 저장소
-	ArrayList<Bbs> datas;
+	// 데이터 임시 저장소                     1    3    3
+	ArrayList<Bbs> datas; // { Bbs, Bbs, Bbs ... }
 	
 	Scanner scanner;
 	BbsInput input;
 	BbsList list;
+	BbsDetail detail;
+	
+	int number = 0;
 	
 	public BbsPresenter(){
 		init();
@@ -30,6 +34,7 @@ public class BbsPresenter {
 		scanner = new Scanner(System.in);
 		input = new BbsInput();
 		list = new BbsList();
+		detail = new BbsDetail();
 		datas = new ArrayList<>();
 	}
 	
@@ -42,13 +47,40 @@ public class BbsPresenter {
 				list.showList(datas);
 				break;
 			case "w":
-				// datas.add(input.process(scanner));
-				Bbs bbs =input.process(scanner);
-				datas.add(bbs);
+				write();
 				break;
 			case "r":
-				
+				goDetail();
 				break;
+			}
+		}
+	}
+	
+	public void write(){
+		// datas.add(input.process(scanner));
+		Bbs bbs =input.process(scanner);
+		
+		number = number + 1;
+		
+		bbs.setId(number);
+		datas.add(bbs);
+	}
+	
+	// 상세보기 이동
+	public void goDetail(){
+		System.out.println("글번호를 입력하세요;");
+		String temp = scanner.nextLine();
+		long id = Long.parseLong(temp);
+		for( Bbs bbs : datas){
+			if(bbs.getId() == id){
+				detail.showNo(bbs.getId());
+				detail.showTitle(bbs.getTitle());
+				detail.showAuthor(bbs.getAuthor());
+				detail.showDate(bbs.getDate());
+				detail.showCount(bbs.getView());
+				detail.showContent(bbs.getContent());
+				detail.endDetail();
+				break; // 조건문에 부합되면 반복문을 중지한다.
 			}
 		}
 	}

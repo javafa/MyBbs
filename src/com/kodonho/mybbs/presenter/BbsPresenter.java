@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.kodonho.mybbs.model.Bbs;
+import com.kodonho.mybbs.model.BbsLoader;
 import com.kodonho.mybbs.view.BbsDetail;
 import com.kodonho.mybbs.view.BbsInput;
 import com.kodonho.mybbs.view.BbsList;
@@ -21,9 +22,12 @@ public class BbsPresenter {
 	BbsInput input;
 	BbsList list;
 	BbsDetail detail;
+	BbsLoader loader;
 	
 	int number = 0;
-	
+	/**
+	 * new 생성자가 호출되면 init() 함수를 통해 초기화해준다
+	 */
 	public BbsPresenter(){
 		init();
 	}
@@ -36,6 +40,7 @@ public class BbsPresenter {
 		input = new BbsInput();
 		list = new BbsList();
 		detail = new BbsDetail();
+		loader = new BbsLoader();
 		datas = new ArrayList<>();
 	}
 	
@@ -45,6 +50,7 @@ public class BbsPresenter {
 			String command = scanner.nextLine();
 			switch(command){
 			case "l":
+				datas = loader.read();
 				list.showList(datas);
 				break;
 			case "w":
@@ -63,7 +69,9 @@ public class BbsPresenter {
 		number = number + 1;
 		bbs.setId(number);
 		bbs.setDate(getDate());
-		datas.add(bbs);
+		
+		loader.write(bbs);
+		//datas.add(bbs);
 	}
 	
 	private String getDate(){

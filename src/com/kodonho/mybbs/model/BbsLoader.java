@@ -44,9 +44,7 @@ public class BbsLoader {
 						);
 				String temp = "";
 				while( (temp = br.readLine()) != null ){ // 줄단위로 파일을 읽어와서
-					System.out.println(temp);
 					String bbsTemp[] = temp.split(COLUMN_SEPERATOR);
-					System.out.println(bbsTemp[0]);
 					// Bbs 에 담고
 					Bbs bbs = new Bbs();
 					bbs.setId(Long.parseLong(bbsTemp[0]));

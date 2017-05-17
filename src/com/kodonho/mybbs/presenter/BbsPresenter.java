@@ -1,5 +1,6 @@
 package com.kodonho.mybbs.presenter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -56,18 +57,23 @@ public class BbsPresenter {
 		}
 	}
 	
-	public void write(){
+	private void write(){
 		// datas.add(input.process(scanner));
 		Bbs bbs =input.process(scanner);
-		
 		number = number + 1;
-		
 		bbs.setId(number);
+		bbs.setDate(getDate());
 		datas.add(bbs);
 	}
 	
+	private String getDate(){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		long currentTime = System.currentTimeMillis();
+		return sdf.format(currentTime);
+	}
+	
 	// 상세보기 이동
-	public void goDetail(){
+	private void goDetail(){
 		System.out.println("글번호를 입력하세요;");
 		String temp = scanner.nextLine();
 		long id = Long.parseLong(temp);
@@ -79,7 +85,7 @@ public class BbsPresenter {
 				detail.showDate(bbs.getDate());
 				detail.showCount(bbs.getView());
 				detail.showContent(bbs.getContent());
-				detail.endDetail();
+				detail.endDetail(); // 가장 아래에 밑줄을 그어준다.
 				break; // 조건문에 부합되면 반복문을 중지한다.
 			}
 		}

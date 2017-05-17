@@ -44,4 +44,9 @@ public class Bbs {
 	public void setView(int view) {
 		this.view = view;
 	}
+	
+	@Override
+	public String toString(){
+		return id + ":" + author + ":" + title + ":" + content;
+	}
 }

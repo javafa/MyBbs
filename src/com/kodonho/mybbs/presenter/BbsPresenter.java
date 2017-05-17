@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.kodonho.mybbs.model.Bbs;
 import com.kodonho.mybbs.view.BbsInput;
+import com.kodonho.mybbs.view.BbsList;
 
 public class BbsPresenter {
 	final boolean START = true;
@@ -16,6 +17,7 @@ public class BbsPresenter {
 	
 	Scanner scanner;
 	BbsInput input;
+	BbsList list;
 	
 	public BbsPresenter(){
 		init();
@@ -27,6 +29,7 @@ public class BbsPresenter {
 	private void init(){
 		scanner = new Scanner(System.in);
 		input = new BbsInput();
+		list = new BbsList();
 		datas = new ArrayList<>();
 	}
 	
@@ -36,7 +39,7 @@ public class BbsPresenter {
 			String command = scanner.nextLine();
 			switch(command){
 			case "l":
-				
+				list.showList(datas);
 				break;
 			case "w":
 				// datas.add(input.process(scanner));

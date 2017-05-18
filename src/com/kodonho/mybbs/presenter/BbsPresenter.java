@@ -15,7 +15,7 @@ public class BbsPresenter {
 	final boolean FINISH = false;
 	boolean runFlag = START;
 	
-	// µ¥ÀÌÅÍ ÀÓ½Ã ÀúÀå¼Ò                     1    3    3
+	// ë°ì´í„° ì„ì‹œ ì €ì¥ì†Œ                     1    3    3
 	ArrayList<Bbs> datas; // { Bbs, Bbs, Bbs ... }
 	
 	Scanner scanner;
@@ -26,14 +26,14 @@ public class BbsPresenter {
 	
 	long number = 0;
 	/**
-	 * new »ı¼ºÀÚ°¡ È£ÃâµÇ¸é init() ÇÔ¼ö¸¦ ÅëÇØ ÃÊ±âÈ­ÇØÁØ´Ù
+	 * new ìƒì„±ìê°€ í˜¸ì¶œë˜ë©´ init() í•¨ìˆ˜ë¥¼ í†µí•´ ì´ˆê¸°í™”í•´ì¤€ë‹¤
 	 */
 	public BbsPresenter(){
 		init();
 	}
 	
 	/**
-	 * ÃÊ±âÈ­ ÇÔ¼ö, »ç¿ëÇÒ °´Ã¼µéÀ» ¹Ì¸® ¸Ş¸ğ¸®¿¡ ·ÎµåÇØµĞ´Ù
+	 * ì´ˆê¸°í™” í•¨ìˆ˜, ì‚¬ìš©í•  ê°ì²´ë“¤ì„ ë¯¸ë¦¬ ë©”ëª¨ë¦¬ì— ë¡œë“œí•´ë‘”ë‹¤
 	 */
 	private void init(){
 		scanner = new Scanner(System.in);
@@ -46,7 +46,7 @@ public class BbsPresenter {
 	
 	public void start(){
 		while(runFlag){
-			System.out.println("¸í·É¾î¸¦ ÀÔ·ÂÇÏ¼¼¿ä [l:¸ñ·Ï, w:¾²±â, r:»ó¼¼º¸±â]");
+			System.out.println("ëª…ë ¹ì–´ë¥¼ ì…ë ¥í•˜ì„¸ìš” [l:ëª©ë¡, w:ì“°ê¸°, r:ìƒì„¸ë³´ê¸°]");
 			String command = scanner.nextLine();
 			switch(command){
 			case "l":
@@ -81,9 +81,9 @@ public class BbsPresenter {
 		return sdf.format(currentTime);
 	}
 	
-	// »ó¼¼º¸±â ÀÌµ¿
+	// ìƒì„¸ë³´ê¸° ì´ë™
 	private void goDetail(){
-		System.out.println("±Û¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä;");
+		System.out.println("ê¸€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”;");
 		String temp = scanner.nextLine();
 		long id = Long.parseLong(temp);
 		for( Bbs bbs : datas){
@@ -94,8 +94,8 @@ public class BbsPresenter {
 				detail.showDate(bbs.getDate());
 				detail.showCount(bbs.getView());
 				detail.showContent(bbs.getContent());
-				detail.endDetail(); // °¡Àå ¾Æ·¡¿¡ ¹ØÁÙÀ» ±×¾îÁØ´Ù.
-				break; // Á¶°Ç¹®¿¡ ºÎÇÕµÇ¸é ¹İº¹¹®À» ÁßÁöÇÑ´Ù.
+				detail.endDetail(); // ê°€ì¥ ì•„ë˜ì— ë°‘ì¤„ì„ ê·¸ì–´ì¤€ë‹¤.
+				break; // ì¡°ê±´ë¬¸ì— ë¶€í•©ë˜ë©´ ë°˜ë³µë¬¸ì„ ì¤‘ì§€í•œë‹¤.
 			}
 		}
 	}

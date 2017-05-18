@@ -5,19 +5,19 @@ import com.kodonho.mybbs.model.Bbs;
 public class BbsDetail {
 	
 	public void showNo(long id){
-		System.out.println("±Û¹øÈ£:"+id);
+		System.out.println("ê¸€ë²ˆí˜¸:"+id);
 	}
 	public void showTitle(String title){
-		System.out.println("Á¦¸ñ:"+title);
+		System.out.println("ì œëª©:"+title);
 	}
 	public void showAuthor(String author){
-		System.out.println("ÀÛ¼ºÀÚ:"+author);
+		System.out.println("ì‘ì„±ì:"+author);
 	}
 	public void showDate(String date){
-		System.out.println("ÀÛ¼ºÀÏÀÚ:"+date);
+		System.out.println("ì‘ì„±ì¼ì:"+date);
 	}
 	public void showCount(int count){
-		System.out.println("Á¶È¸¼ö:"+count);
+		System.out.println("ì¡°íšŒìˆ˜:"+count);
 	}
 	public void showContent(String content){
 		System.out.println(content);

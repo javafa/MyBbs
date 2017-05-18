@@ -20,41 +20,41 @@ public class BbsLoader {
 	final String DATABASE_NAME = "mybbs.db";
 	final String DATABASE_COUNT = "mybbscount.db";
 
-	final String COLUMN_SEPERATOR = "@@"; // ÇÑÄ­ ´ÜÀ§
-	final String RECORD_SEPERATOR = "\r\n"; // ÇÑÁÙ ´ÜÀ§
+	final String COLUMN_SEPERATOR = "@@"; // í•œì¹¸ ë‹¨ìœ„
+	final String RECORD_SEPERATOR = "\r\n"; // í•œì¤„ ë‹¨ìœ„
 
 	/**
-	 * ÀúÀå¼Ò¿¡¼­ µ¥ÀÌÅÍ¸¦ ÀĞ¾î¿È
+	 * ì €ì¥ì†Œì—ì„œ ë°ì´í„°ë¥¼ ì½ì–´ì˜´
 	 * 
-	 * @return ¹İÈ¯°ª¿¡ ´ëÇÑ ¼³¸í
+	 * @return ë°˜í™˜ê°’ì— ëŒ€í•œ ì„¤ëª…
 	 */
 	public ArrayList<Bbs> read() {
 		ArrayList<Bbs> result = new ArrayList<>();
 
 		// TODO
-		// 1. ÆÄÀÏ Á¸Àç À¯¹« °Ë»ç
+		// 1. íŒŒì¼ ì¡´ì¬ ìœ ë¬´ ê²€ì‚¬
 		File database = new File(DATABASE_DIR + DATABASE_NAME);
 		if (database.exists()) {
-			// 2. ÀÖÀ¸¸é ÆÄÀÏÀ» ÀĞ¾î¼­ ÁÙ´ÜÀ§·Î Bbs ¿¡ ÀúÀåÇÏ°í
-			// 2.1 ÆÄÀÏ¿¡ »¡´ë¸¦ ²È¾Æ¼­ ÀĞÀ» ÁØºñ¸¦ ÇÑ´Ù.
+			// 2. ìˆìœ¼ë©´ íŒŒì¼ì„ ì½ì–´ì„œ ì¤„ë‹¨ìœ„ë¡œ Bbs ì— ì €ì¥í•˜ê³ 
+			// 2.1 íŒŒì¼ì— ë¹¨ëŒ€ë¥¼ ê½‚ì•„ì„œ ì½ì„ ì¤€ë¹„ë¥¼ í•œë‹¤.
 			BufferedReader br;
 			try {
-				br = new BufferedReader( // 3. ¹öÆÛ¸¦ ¾º¿î´Ù(ÇÑ¹ø¿¡ ´ë·®ÀÇ µ¥ÀÌÅÍ¸¦ ÀĞ¾îµéÀÎ´Ù) - ¹äÁÖ°Æ
-											// ´ÜÀ§·Î µ¥ÀÌÅÍ¸¦ ÀĞ´Â´Ù
-						new InputStreamReader( // 2. ·¡ÆÛÅ¬·¡½º ¾º¿öÁØ´Ù (ºÎ°¡ÀûÀÎ µ¿ÀÛ). Ä³¸¯ÅÍ¼ÂÀ»
-												// º¯°æÇØÁÖ´Â ¿ªÇÒ
+				br = new BufferedReader( // 3. ë²„í¼ë¥¼ ì”Œìš´ë‹¤(í•œë²ˆì— ëŒ€ëŸ‰ì˜ ë°ì´í„°ë¥¼ ì½ì–´ë“¤ì¸ë‹¤) - ë°¥ì£¼ê±±
+											// ë‹¨ìœ„ë¡œ ë°ì´í„°ë¥¼ ì½ëŠ”ë‹¤
+						new InputStreamReader( // 2. ë˜í¼í´ë˜ìŠ¤ ì”Œì›Œì¤€ë‹¤ (ë¶€ê°€ì ì¸ ë™ì‘). ìºë¦­í„°ì…‹ì„
+												// ë³€ê²½í•´ì£¼ëŠ” ì—­í• 
 								new FileInputStream(database), "UTF-8") // 1.
-																		// ½ºÆ®¸²
-																		// »ı¼º -
-																		// ¼ı°¡¶ôÀ»
-																		// »ı¼ºÇØ¼­
-																		// ÇÑ±ÛÀÚ¾¿
-																		// ÀĞ¾îµéÀÎ´Ù.
+																		// ìŠ¤íŠ¸ë¦¼
+																		// ìƒì„± -
+																		// ìˆ«ê°€ë½ì„
+																		// ìƒì„±í•´ì„œ
+																		// í•œê¸€ìì”©
+																		// ì½ì–´ë“¤ì¸ë‹¤.
 				);
 				String temp = "";
-				while ((temp = br.readLine()) != null) { // ÁÙ´ÜÀ§·Î ÆÄÀÏÀ» ÀĞ¾î¿Í¼­
+				while ((temp = br.readLine()) != null) { // ì¤„ë‹¨ìœ„ë¡œ íŒŒì¼ì„ ì½ì–´ì™€ì„œ
 					String bbsTemp[] = temp.split(COLUMN_SEPERATOR);
-					// Bbs ¿¡ ´ã°í
+					// Bbs ì— ë‹´ê³ 
 					Bbs bbs = new Bbs();
 					bbs.setId(Long.parseLong(bbsTemp[0]));
 					bbs.setTitle(bbsTemp[1]);
@@ -62,7 +62,7 @@ public class BbsLoader {
 					bbs.setDate(bbsTemp[3]);
 					bbs.setView(Integer.parseInt(bbsTemp[4]));
 					bbs.setContent(bbsTemp[5]);
-					// ¿Ï¼ºµÈ Bbs ¸¦ result ¿¡ add ÇÑ´Ù. (¹İº¹)
+					// ì™„ì„±ëœ Bbs ë¥¼ result ì— add í•œë‹¤. (ë°˜ë³µ)
 					result.add(bbs);
 				}
 			} catch (Exception e) {
@@ -74,28 +74,28 @@ public class BbsLoader {
 	}
 
 	/**
-	 * ÀúÀå¼Ò¿¡ µ¥ÀÌÅÍ¸¦ ÀúÀå @param bbs @throws
+	 * ì €ì¥ì†Œì— ë°ì´í„°ë¥¼ ì €ì¥ @param bbs @throws
 	 */
 	public void write(Bbs bbs) {
-		// bbs¿¡ ÀÖ´Â µ¥ÀÌÅÍ¸¦ ÅØ½ºÆ® ÆÄÀÏ¿¡ ÀúÀåÇÑ´Ù.
-		// 1. µğ·ºÅä¸®°¡ ÀÖ´ÂÁö °Ë»çÇÏ°í ¾øÀ¸¸é »ı¼º
+		// bbsì— ìˆëŠ” ë°ì´í„°ë¥¼ í…ìŠ¤íŠ¸ íŒŒì¼ì— ì €ì¥í•œë‹¤.
+		// 1. ë””ë ‰í† ë¦¬ê°€ ìˆëŠ”ì§€ ê²€ì‚¬í•˜ê³  ì—†ìœ¼ë©´ ìƒì„±
 		FileUtil.makeDirectoryIfNotExist(DATABASE_DIR);
-		// 1.1 ÆÄÀÏÀÌ ÀÖ´ÂÁö °Ë»çÇÏ°í ¾øÀ¸¸é »ı¼º
+		// 1.1 íŒŒì¼ì´ ìˆëŠ”ì§€ ê²€ì‚¬í•˜ê³  ì—†ìœ¼ë©´ ìƒì„±
 		File database = FileUtil.getFile(DATABASE_DIR + DATABASE_NAME);
 
-		// 2.2 bbs ÀÇ ³»¿ëÀ» È¾À¸·Î ÆîÄ£´Ù
+		// 2.2 bbs ì˜ ë‚´ìš©ì„ íš¡ìœ¼ë¡œ í¼ì¹œë‹¤
 		String oneData = bbs.getId() + COLUMN_SEPERATOR + bbs.getTitle() + COLUMN_SEPERATOR + bbs.getAuthor()
 				+ COLUMN_SEPERATOR + bbs.getDate() + COLUMN_SEPERATOR + bbs.getView() + COLUMN_SEPERATOR
 				+ bbs.getContent() + RECORD_SEPERATOR;
 
-		// 3. È¾À¸·Î ÆîÃÄÁø µ¥ÀÌÅÍ¸¦ ÆÄÀÏÀÇ Á¦ÀÏ ¸¶Áö¸·ÁÙ¿¡ ÀúÀåÇÑ´Ù.
-		// 3.1 FileWriter °´Ã¼¸¦ »ç¿ëÇØ¼­ ±âÁ¸ µ¥ÀÌÅÍ¿¡ °è¼Ó ´õÇØ¾´´Ù.
+		// 3. íš¡ìœ¼ë¡œ í¼ì³ì§„ ë°ì´í„°ë¥¼ íŒŒì¼ì˜ ì œì¼ ë§ˆì§€ë§‰ì¤„ì— ì €ì¥í•œë‹¤.
+		// 3.1 FileWriter ê°ì²´ë¥¼ ì‚¬ìš©í•´ì„œ ê¸°ì¡´ ë°ì´í„°ì— ê³„ì† ë”í•´ì“´ë‹¤.
 		try {
-			// FileWriter writer = new FileWriter(database, true); // µÎ¹øÂ° ÀÎÀÚ°¡
-			// append ¸¦ Çã¿ëÇÒ°ÍÀÎÁö ¿©ºÎ
+			// FileWriter writer = new FileWriter(database, true); // ë‘ë²ˆì§¸ ì¸ìê°€
+			// append ë¥¼ í—ˆìš©í• ê²ƒì¸ì§€ ì—¬ë¶€
 			Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(database, true), "UTF-8"));
 			writer.append(oneData); //
-			writer.close(); // ! ÇÊ¼ö
+			writer.close(); // ! í•„ìˆ˜
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -103,28 +103,28 @@ public class BbsLoader {
 
 	public long readCount() {
 		long result = 0;
-		// 1. À§¿Í ¸¶Âù°¡Áö·Î µğ·ºÅä¸®¿Í ÆÄÀÏÀÌ ÀÖ´ÂÁö °Ë»çÇÏ°í ¾øÀ¸¸é ¸ÕÀú »ı¼ºÇØÁØ´Ù
-		// 1.1 µğ·ºÅä¸® °Ë»ç ¹× »ı¼º
+		// 1. ìœ„ì™€ ë§ˆì°¬ê°€ì§€ë¡œ ë””ë ‰í† ë¦¬ì™€ íŒŒì¼ì´ ìˆëŠ”ì§€ ê²€ì‚¬í•˜ê³  ì—†ìœ¼ë©´ ë¨¼ì € ìƒì„±í•´ì¤€ë‹¤
+		// 1.1 ë””ë ‰í† ë¦¬ ê²€ì‚¬ ë° ìƒì„±
 		FileUtil.makeDirectoryIfNotExist(DATABASE_DIR);
-		// 1.2 ÆÄÀÏÀÌ ÀÖ´ÂÁö °Ë»çÇÏ°í ¾øÀ¸¸é »ı¼º
+		// 1.2 íŒŒì¼ì´ ìˆëŠ”ì§€ ê²€ì‚¬í•˜ê³  ì—†ìœ¼ë©´ ìƒì„±
 		File database = FileUtil.getFile(DATABASE_DIR + DATABASE_COUNT);
 
 		try {
-			FileReader fr = new FileReader(database);   // 1. ÀĞ±âÀ§ÇÑ ¾ãÀº »¡´ë²È±â
-			BufferedReader br = new BufferedReader(fr); // 2. ±½Àº »¡´ë
-			String number = br.readLine();              // 3. ÇÑÁÙ¸¸ ÀĞ¾î¿À±â
-			// ·ÎÁ÷
-			// 4. ÀĞ¾î¿Â µ¥ÀÌÅÍ¿¡ ¾Æ¹«°Íµµ ¾øÀ¸¸é Ã¹ ¹øÂ° ±ÛÀÌ¹Ç·Î result ¿¡ 1À» ¼¼ÆÃ
+			FileReader fr = new FileReader(database);   // 1. ì½ê¸°ìœ„í•œ ì–‡ì€ ë¹¨ëŒ€ê½‚ê¸°
+			BufferedReader br = new BufferedReader(fr); // 2. êµµì€ ë¹¨ëŒ€
+			String number = br.readLine();              // 3. í•œì¤„ë§Œ ì½ì–´ì˜¤ê¸°
+			fr.close();
+			// ë¡œì§
+			// 4. ì½ì–´ì˜¨ ë°ì´í„°ì— ì•„ë¬´ê²ƒë„ ì—†ìœ¼ë©´ ì²« ë²ˆì§¸ ê¸€ì´ë¯€ë¡œ result ì— 1ì„ ì„¸íŒ…
 			if(number == null){
 				result = 1;
-			// 5. µ¥ÀÌÅÍ°¡ ÀÖÀ¸¸é ¼ıÀÚ·Î º¯È¯ÇÏ°í +1 À» ÇØ¼­ result ¿¡ ¼¼ÆÃ
+			// 5. ë°ì´í„°ê°€ ìˆìœ¼ë©´ ìˆ«ìë¡œ ë³€í™˜í•˜ê³  +1 ì„ í•´ì„œ result ì— ì„¸íŒ…
 			}else{
 				long tempNumber = Long.parseLong(number);
 				result = tempNumber + 1;
 			}
-			fr.close();
-			
-			// 6. µ¥ÀÌÅÍº£ÀÌ½º¿¡ ÃÖÁ¾ Ä«¿îÆ®¸¦ ÀúÀåÇÑ´Ù
+
+			// 6. ë°ì´í„°ë² ì´ìŠ¤ì— ìµœì¢… ì¹´ìš´íŠ¸ë¥¼ ì €ì¥í•œë‹¤
 			FileWriter fw = new FileWriter(database); 
 			fw.write(result+"");
 			fw.close(); 

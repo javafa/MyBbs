@@ -7,11 +7,11 @@ import com.kodonho.mybbs.model.Bbs;
 public class BbsInput {
 	
 	public Bbs process(Scanner scanner){
-		System.out.println("Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
+		System.out.println("ì œëª©ì„ ì…ë ¥í•˜ì„¸ìš”.");
 		String title = scanner.nextLine();
-		System.out.println("ÀÛ¼ºÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+		System.out.println("ì‘ì„±ìë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 		String author = scanner.nextLine();
-		System.out.println("³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
+		System.out.println("ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”.");
 		String content = scanner.nextLine();
 		
 		Bbs bbs = new Bbs();

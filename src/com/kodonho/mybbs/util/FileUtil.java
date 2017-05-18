@@ -8,7 +8,7 @@ public class FileUtil {
 	public static void makeDirectoryIfNotExist(String dirPath){
 		File dir = new File(dirPath);
 		if(!dir.exists()){
-			dir.mkdirs(); // °Ë»çÇÑ °æ·Î»óÀÇ ¸ğµç µğ·ºÅä¸®¸¦ »ı¼ºÇØÁØ´Ù
+			dir.mkdirs(); // ê²€ì‚¬í•œ ê²½ë¡œìƒì˜ ëª¨ë“  ë””ë ‰í† ë¦¬ë¥¼ ìƒì„±í•´ì¤€ë‹¤
 		}
 	}
 	
